@@ -1,0 +1,80 @@
+1. inicia um projeto node -> npm init -y
+2. configurar a arquitetura do projeto
+arquitetura do projeto
+NODEAPI/
+│-- src/
+│   ├── controllers/
+│   │   ├── user.controller.ts
+│   ├── routes/
+│   │   ├── user.routes.ts
+│   ├── middlewares/
+│   │   ├── error.middleware.ts
+│   ├── models/
+│   │   ├── user.model.ts
+│   ├── services/
+│   │   ├── user.service.ts
+│   ├── app.ts
+│   ├── server.ts
+│-- package.json
+│-- tsconfig.json
+│-- .env
+
+3.Depencias do projeto
+
+DEPENDENCIAS DE PRODUÇAO
+EXPRESS - framework para cirar servidores e apis REST
+instalaçao: npm install express
+
+DOTENV - gerencia variaveis de ambiente
+instalaçao: npm install dotenv
+
+CORS - permite que a api seja acessada de diferentes origens
+instalaçao: npm install @types/cors 
+
+BODY-PARSER - converte o corpo da requisiçao para JSON automaticamente
+instalaçao: npm install body-parser 
+
+EXPRESS-ASYNC-ERROS - facilita o tratamento de erros em rotas assincronas
+instalaçao: npm express-async-errors
+
+DEPENDENCIAS DE DESENVOLVIMENTO
+
+TYPESCRIPT - compilador que converte ts para js
+instalaçao: npm install typescript --save-dev
+
+@types/node -define os tipos do node para que o typescript reconheça os modulos:
+FS,PATH,HTTP
+instalaçao: npm install @types/node
+
+@types/express - define os tipos para o express para evitar erros ao usa-lo no typescript
+instalaçao: npm install @types/express
+
+TS-NODE - executa arquivos typescript diretamente
+instalaçao: npm install ts-node
+
+NODEMON - reinicia o servidor automaticamente quando reconhece uma alteraçao
+no codigo fonte
+instalaçao: npm install nodemon 
+
+CONFIGURAR O TYPESCRIPT
+
+comando: npx tsc --intit
+
+configurar package.json
+"dev" : "nodemon src src/server.ts"
+
+configurar NODEMON
+criar um arquivo na raiz chamado nodemon.json
+
+//instalar banco de dados 
+knex e uma query builder
+
+instalaçao: npm install knex --save
+instalar o pacote para o tipo de banco que vai usar npm install
+
+knex tabalha com migrations que sao arquivos programaveis para criar tabelas
+
+para criar migrations rote o comandonpx knex migrate:make nome_migration
+
+create_users_table
+alter_user_table
