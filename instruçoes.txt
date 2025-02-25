@@ -78,3 +78,7 @@ para criar migrations rote o comandonpx knex migrate:make nome_migration
 
 create_users_table
 alter_user_table
+
+para usar autenticaçao na api usando jwt
+npm i @types/jsonwebtoken - gerar tokens jwt
+npm i -D @types/dcryptjs - pacote usando para criptografar senhas

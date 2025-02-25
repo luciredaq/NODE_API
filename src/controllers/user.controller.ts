@@ -1,28 +1,49 @@
 import { create } from "domain";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { userService } from "../services/user.service";
 
 export const userController = {
-    getAll: (req: Request, res: Response) => {
-        res.json(userService.findAll())
+    getAll: async (req: Request, res: Response, next: NextFunction) => {
+        try{
+            let data = await userService.findAll()
+            res.json(data)
+        }catch(error){
+            next(error)
+        }
     },
-    getById: (req: Request, res: Response) => {
-        const user = userService.findById(Number(req.params.id))
-        user ? res.json(user) : res.status(404).json({ message: "Usuario nao encontrado" })
+    getById: async (req: Request, res: Response, next: NextFunction) => {
+        try{
+            const user = await userService.findById(Number(req.params.id))
+            user ? res.json(user) : res.status(404).json({ message: "Usuario nao encontrado" })
+        }catch(error){
+            next(error)
+        }
     },
-    create: (req: Request, res: Response) => {
-        const { name, email } = req.body
-        const user = userService.create(name, email)
-        res.status(201).json(user)
+    create: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try{
+            const { name, email } = req.body
+            const user = await userService.create(name, email)
+            res.status(201).json(user)
+        }catch(error){
+            next(error)
+        }
     },
-    update: (req: Request, res: Response) => {
-        const { name, email } = req.body
-        const user = userService.update(Number(req.params.id), name, email)
-        user ? res.json(user) : res.status(404).json({ message: "Usuario nao encontrado" })
+    update: async (req: Request, res: Response, next: NextFunction) => {
+        try{
+            const { name, email } = req.body
+            const user = await userService.update(Number(req.params.id), name, email)
+            user ? res.json(user) : res.status(404).json({ message: "Usuario nao encontrado" })
+        }catch(error){
+            next(error)
+        }
     },
-    delete: (req: Request, res: Response) => {
-        const success = userService.delete(Number(req.params.id))
-        success ? res.json({ message: "Usuario removido com sucesso" }) : res.status(404).
-            json({ message: "usuario nao encontrado" })
+    delete: async (req: Request, res: Response, next: NextFunction) => {
+        try{
+            const success = await userService.delete(Number(req.params.id))
+            success ? res.json({ message: "Usuario removido com sucesso" }) : res.status(404).
+                json({ message: "usuario nao encontrado" })
+        }catch(error){
+            next(error)
+        }
     },
 }
